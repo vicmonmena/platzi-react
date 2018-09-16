@@ -209,3 +209,30 @@ Container | Presentational
 	- Llaman a acciones (`*_REDUX_*`)
 	- Generados por (`*_Higher Order Components_*`)
 	- Proveeen de callbacks a la UI
+
+## Portales
+
+`Portales` es la manera en la que podemos renderizar componentes fuera del contenedor principal de la aplicación.
+
+```js
+<divid="App"></div>
+```
+
+El caso de uso mas común son las ventanas modal.
+
+Para crear un portal, se debe importar el metodo createPortal de react-dom:
+
+```js
+import { createPortal} from'react-dom';
+```
+El metodo createPortal() recibe dos parametros, al igual que con render es Lo que se va a renderizar y donde se va a renderizar:
+
+```js
+classModalContainerextendsComponent{
+  render() {
+    return (
+      createPortal(<Component />, document.getElementById('component-container'))
+    )
+  }
+}
+```
