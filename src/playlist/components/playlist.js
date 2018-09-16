@@ -17,7 +17,13 @@ function Playlist(props) {
           // key debe ser único
           //return <Media title={item.title} author={item.author} image ={item.image} key={item.id} />
           // Como alternativa usamos el split operator (ecma script 6) -> {...item} para pasar todo el bjeto en lugar de propiedad a propiedad
-          return <Media {...item} key={item.id} />
+          return (
+            <Media 
+              {...item} 
+              key={item.id} 
+              handleClick={props.handleOpenModal}
+            />
+          )
         })
       }
     </div>
