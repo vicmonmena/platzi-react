@@ -5,11 +5,11 @@ import Related from '../components/related'
 import ModalContainer from './../../widgets/containers/modal';
 import Modal from './../../widgets/components/modal';
 import HandleError from './../../error/containers/handle-error';
-
+import VideoPlayer from './../../player/containers/video-player';
 class Home extends Component {
   
   state = {
-    modalVisible: true,
+    modalVisible: false,
   }
 
   handleCloseModal = (event) => {
@@ -30,6 +30,7 @@ class Home extends Component {
       <HandleError>
         <HomeLayout>
           <Related />
+          <VideoPlayer />
           <Categories 
             categories={this.props.data.categories}
             handleOpenModal={this.handleOpenModal}/>
