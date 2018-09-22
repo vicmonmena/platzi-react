@@ -31,6 +31,14 @@ class VideoPlayer extends Component {
       duration: this.video.duration
     })
   }
+
+  handleTimeUpdate = event => {
+    this.video = event.target;
+    this.setState({
+      currentTime: this.video.currentTime
+    })
+  }
+  
   /**
    * Implementamos este método para gestionar el estado del componente Video una vez está montado
    */
@@ -48,15 +56,20 @@ class VideoPlayer extends Component {
         <Controls>
           <PlayPause 
             pause={this.state.pause}
-            handleClick={this.togglePlay} />
+            handleClick={this.togglePlay} 
+          />
           <Timer 
-            duration= {this.state.duration} />
+            duration = {this.state.duration} 
+            currentTime = {this.state.currentTime}
+          />
         </Controls>
         <Video
           autoPlay={this.props.autoplay}
           pause={this.state.pause}
           src="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
-          handleLoadedMetadada={this.handleLoadedMetadada}/>
+          handleLoadedMetadada={this.handleLoadedMetadada}
+          handleTimeUpdate={this.handleTimeUpdate}
+          />
       </VideoPlayerLayout>
     )
   }
