@@ -8,6 +8,7 @@ import Controls from '../components/video-player-controls';
 import { formatTime } from './../../utils/commons';
 import ProgressBar from './../components/progressbar';
 import Spinner from './../components/spinner';
+import Volume from './../components/volume';
 
 class VideoPlayer extends Component {
 
@@ -79,28 +80,34 @@ class VideoPlayer extends Component {
     })
   }
 
+  handleVolumeChange = event => {
+    this.video.volume = event.target.value
+  }
+
   render() {
     return (
       <VideoPlayerLayout>
         <Title 
           title="Este es nuestro video guapo!"/>
         <Controls>
-          <PlayPause 
-            pause={this.state.pause}
-            handleClick={this.togglePlay} 
-          />
-          <Timer 
-            duration = {formatTime(this.state.duration)} 
-            currentTime = {(this.state.currentTime) ? formatTime(this.state.currentTime): '00:00'}
-          />
-          <ProgressBar 
-            duration={this.state.duration}
-            value={this.state.currentTime}
-            handleProgressBarChange={this.handleProgressBarChange}
-          />
+            <PlayPause 
+              pause={this.state.pause}
+              handleClick={this.togglePlay} 
+            />
+            <Timer 
+              duration = {formatTime(this.state.duration)} 
+              currentTime = {(this.state.currentTime) ? formatTime(this.state.currentTime): '00:00'}
+            />
+            <ProgressBar 
+              duration={this.state.duration}
+              value={this.state.currentTime}
+              handleProgressBarChange={this.handleProgressBarChange}
+            />
+          <Volume 
+            handleVolumeChange={this.handleVolumeChange}/>
         </Controls>
         <Spinner 
-          active={this.state.loading}/>
+            active={this.state.loading}/>
         <Video
           autoPlay={this.props.autoplay}
           pause={this.state.pause}

@@ -1,19 +1,19 @@
 import React from 'react';
 import './play-pause.css'
-import Play from './../../icons/components/play';
-import Pause from './../../icons/components/pause';
+import PlayIcon from './../../icons/components/play';
+import PauseIcon from './../../icons/components/pause';
 
 const PlayPause = (props) => (
   <div className="PlayPause">
     { props.pause ?
       <button
         onClick={props.handleClick}>
-        <Play size={25} color="white"/>
+        <PlayIcon size={20} color="white"/>
       </button>
       :
       <button
         onClick={props.handleClick}>
-        <Pause size={25} color="grey"/>
+        <PauseIcon size={20} color="grey"/>
       </button>
     }
   </div>
