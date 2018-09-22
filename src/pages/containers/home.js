@@ -30,8 +30,8 @@ class Home extends Component {
     return(
       <HandleError>
         <HomeLayout>
-          <VideoPlayer />
           <Related />
+          <VideoPlayer />
           <Categories 
             categories={this.props.data.categories}
             handleOpenModal={this.handleOpenModal}/>
