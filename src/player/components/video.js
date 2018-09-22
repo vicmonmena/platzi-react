@@ -23,7 +23,9 @@ class Video extends Component {
     // El componente padre pasará la función que maneja el metadata de los videos
     const {
       handleLoadedMetadada,
-      handleTimeUpdate
+      handleTimeUpdate,
+      handleSeeking,
+      handleSeeked
     } = this.props;
     return (
       <div className="Video">
@@ -34,6 +36,8 @@ class Video extends Component {
           ref={this.setRef}
           onLoadedMetadata={handleLoadedMetadada}
           onTimeUpdate={handleTimeUpdate}
+          onSeeking={handleSeeking}
+          onSeeked={handleSeeked}
           />
       </div>
     )

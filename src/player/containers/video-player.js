@@ -7,13 +7,15 @@ import Timer from './../components/timer';
 import Controls from '../components/video-player-controls';
 import { formatTime } from './../../utils/commons';
 import ProgressBar from './../components/progressbar';
+import Spinner from './../components/spinner';
 
 class VideoPlayer extends Component {
 
   state = {
     pause: true,
-    duration: formatTime(0),
-    currentTime: formatTime(0)
+    duration: 0,
+    currentTime: 0,
+    loading: false
   }
 
   togglePlay = event => (
@@ -52,10 +54,31 @@ class VideoPlayer extends Component {
     });
   }
   
+  /**
+   * Manejo de la reproducción de video en función de la posición del progress bar
+   */
   handleProgressBarChange = event => {
     this.video.currentTime = event.target.value;
   }
   
+  /**
+   * Video en carga
+   */
+  handleSeeking = event => {
+    this.setState({
+      loading: true
+    })
+  }
+
+  /**
+   * Video en reproducción
+   */
+  handleSeeked = event => {
+    this.setState({
+      loading: false
+    })
+  }
+
   render() {
     return (
       <VideoPlayerLayout>
@@ -76,12 +99,16 @@ class VideoPlayer extends Component {
             handleProgressBarChange={this.handleProgressBarChange}
           />
         </Controls>
+        <Spinner 
+          active={this.state.loading}/>
         <Video
           autoPlay={this.props.autoplay}
           pause={this.state.pause}
           src="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
           handleLoadedMetadada={this.handleLoadedMetadada}
           handleTimeUpdate={this.handleTimeUpdate}
+          handleSeeked={this.handleSeeked}
+          handleSeeking={this.handleSeeking}
           />
       </VideoPlayerLayout>
     )
