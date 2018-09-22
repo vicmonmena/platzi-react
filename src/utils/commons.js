@@ -11,8 +11,8 @@ const leftPad = number => (
  * @param {*} srcTime - tiempo en milisegundos
  */
 const formatTime = srcTime => {
-  const minutes = parseInt(srcTime / 60, 10)
-  const seconds = parseInt(srcTime % 60, 10)
+  const minutes = (srcTime) ? parseInt(srcTime / 60, 10) : '00'
+  const seconds = (srcTime) ? parseInt(srcTime % 60, 10) : '00'
   return `${leftPad(minutes)}:${leftPad(seconds)}`
 }
 

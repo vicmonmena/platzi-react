@@ -6,6 +6,7 @@ import PlayPause from './../components/play-pause';
 import Timer from './../components/timer';
 import Controls from '../components/video-player-controls';
 import { formatTime } from './../../utils/commons';
+import ProgressBar from './../components/progressbar';
 
 class VideoPlayer extends Component {
 
@@ -31,14 +32,14 @@ class VideoPlayer extends Component {
     this.video = event.target;
     // Esto nos permite mostrar la duración en la UI
     this.setState({
-      duration: formatTime(this.video.duration)
+      duration: this.video.duration
     })
   }
 
   handleTimeUpdate = event => {
     this.video = event.target;
     this.setState({
-      currentTime: (this.video.currentTime) ? formatTime(this.video.currentTime): '00:00'
+      currentTime: this.video.currentTime
     })
   }
   
@@ -49,6 +50,10 @@ class VideoPlayer extends Component {
     this.setState({
       pause: !this.props.pause // si pause = true => se reproduce el video y se visualiza el botón pause para poder pararlo
     });
+  }
+  
+  handleProgressBarChange = event => {
+    this.video.currentTime = event.target.value;
   }
   
   render() {
@@ -62,8 +67,13 @@ class VideoPlayer extends Component {
             handleClick={this.togglePlay} 
           />
           <Timer 
-            duration = {this.state.duration} 
-            currentTime = {this.state.currentTime}
+            duration = {formatTime(this.state.duration)} 
+            currentTime = {(this.state.currentTime) ? formatTime(this.state.currentTime): '00:00'}
+          />
+          <ProgressBar 
+            duration={this.state.duration}
+            value={this.state.currentTime}
+            handleProgressBarChange={this.handleProgressBarChange}
           />
         </Controls>
         <Video
