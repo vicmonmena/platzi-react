@@ -23,6 +23,15 @@ class VideoPlayer extends Component {
     })
   )
 
+  /**
+   * Implementamos este método para gestionar el estado del componente Video una vez está montado
+   */
+  componentDidMount() {
+    this.setState({
+      pause: !this.props.pause // si pause = true => se reproduce el video y se visualiza el botón pause para poder pararlo
+    });
+  }
+  
   render() {
     return (
       <VideoPlayerLayout>
@@ -32,7 +41,8 @@ class VideoPlayer extends Component {
           pause={this.state.pause}
           handleClick={this.togglePlay} />
         <Video
-          autoPlay={true}
+          autoPlay={this.props.autoplay}
+          pause={this.state.pause}
           src="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"/>
       </VideoPlayerLayout>
     )
