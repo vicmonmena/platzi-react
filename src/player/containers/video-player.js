@@ -3,26 +3,34 @@ import VideoPlayerLayout from './../components/video-player-layout'
 import Video from './../components/video';
 import Title from './../components/title';
 import PlayPause from './../components/play-pause';
-
+import Timer from './../components/timer';
+import Controls from '../components/video-player-controls';
 class VideoPlayer extends Component {
 
   state = {
     pause: true,
-    play: false
+    duration: 0
   }
 
-  togglePlay = (event) => (
+  togglePlay = event => (
     this.setState({
       pause: !this.state.pause,
     })
   )
 
-  togglePause = (event) => (
+  togglePause = event => (
     this.setState({
       pause: true,
     })
   )
 
+  handleLoadedMetadada = event => {
+    this.video = event.target;
+    // Esto nos permite mostrar la duración en la UI
+    this.setState({
+      duration: this.video.duration
+    })
+  }
   /**
    * Implementamos este método para gestionar el estado del componente Video una vez está montado
    */
@@ -37,13 +45,18 @@ class VideoPlayer extends Component {
       <VideoPlayerLayout>
         <Title 
           title="Este es nuestro video guapo!"/>
-        <PlayPause 
-          pause={this.state.pause}
-          handleClick={this.togglePlay} />
+        <Controls>
+          <PlayPause 
+            pause={this.state.pause}
+            handleClick={this.togglePlay} />
+          <Timer 
+            duration= {this.state.duration} />
+        </Controls>
         <Video
           autoPlay={this.props.autoplay}
           pause={this.state.pause}
-          src="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"/>
+          src="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4"
+          handleLoadedMetadada={this.handleLoadedMetadada}/>
       </VideoPlayerLayout>
     )
   }
