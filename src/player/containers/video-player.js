@@ -5,11 +5,14 @@ import Title from './../components/title';
 import PlayPause from './../components/play-pause';
 import Timer from './../components/timer';
 import Controls from '../components/video-player-controls';
+import { formatTime } from './../../utils/commons';
+
 class VideoPlayer extends Component {
 
   state = {
     pause: true,
-    duration: 0
+    duration: formatTime(0),
+    currentTime: formatTime(0)
   }
 
   togglePlay = event => (
@@ -28,14 +31,14 @@ class VideoPlayer extends Component {
     this.video = event.target;
     // Esto nos permite mostrar la duración en la UI
     this.setState({
-      duration: this.video.duration
+      duration: formatTime(this.video.duration)
     })
   }
 
   handleTimeUpdate = event => {
     this.video = event.target;
     this.setState({
-      currentTime: this.video.currentTime
+      currentTime: (this.video.currentTime) ? formatTime(this.video.currentTime): '00:00'
     })
   }
   
