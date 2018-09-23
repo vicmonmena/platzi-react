@@ -1,4 +1,4 @@
-# ABout React
+# About React and this project
 
 ## Sobre la estructura del proyecto
 

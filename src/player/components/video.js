@@ -13,6 +13,7 @@ class Video extends Component {
   setRef = element => (
     this.video = element
   )
+  
   componentWillReceiveProps(nextProps) {
     if(nextProps.pause !== this.props.pause) {
       this.togglePlay();
